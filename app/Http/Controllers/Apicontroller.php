@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Categoria;
-use App\Producto;
+use App\Traits\ApiResponser;
+
 
 
 class Apicontroller extends Controller
 {
     //
-    public function cargacategorias(){
+/*     public function cargacategorias(){
         $consulta = Categoria::orderby('nombre','ASC')->get();
         return response()->json($consulta,201);
     }
@@ -36,5 +36,7 @@ class Apicontroller extends Controller
     public function altaproducto(Request $request){
         $consulta=Producto::create($request->all());
         return response()->json($consulta,201);
-    }
+    } */
+    use ApiResponser;
+
 }
