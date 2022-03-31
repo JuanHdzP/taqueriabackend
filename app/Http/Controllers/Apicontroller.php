@@ -39,6 +39,10 @@ class Apicontroller extends Controller
         $consulta=Categoria::create($request->all());
         return response()->json($consulta,201);
     } 
+    public function modifcategoria(Request $request){
+        $categoria=Categoria::create($request->all());
+        return response()->json($categoria,201);
+    } 
 
 
     public function cargaproductos(){
@@ -63,8 +67,14 @@ class Apicontroller extends Controller
         return response()->json(null,204);
     }
     public function altaproducto(Request $request){
-        $consulta=Producto::create($request->all());
-        return response()->json($consulta,201);
+        $producto = Producto::findOrfail($id);
+        $producto->update($request->all());
+        return $this->showOne($producto);
+    } 
+
+    public function modifproducto(Request $request){
+        $producto=Producto::create($request->all());
+        return response()->json($producto,201);
     } 
 
     public function cargausuarios(){
@@ -93,6 +103,11 @@ class Apicontroller extends Controller
         return response()->json($consulta,201);
     } 
 
+    public function modifusuario(Request $request){
+        $usuario=Usuario::create($request->all());
+        return response()->json($usuario,201);
+    }
+
 
     public function cargatypeusers(){
         $typeusers = TypeUser::orderby('nombre','ASC')->get();
@@ -116,6 +131,11 @@ class Apicontroller extends Controller
         $consulta=TypeUser::create($request->all());
         return response()->json($consulta,201);
     } 
+
+    public function modiftypeuser(Request $request){
+        $typeuser=TypeUser::create($request->all());
+        return response()->json($typeuser,201);
+    }
 
     public function cargaventas(){
         $ventas = \DB::select("select v.fecha, v.total, v.id,
@@ -141,6 +161,10 @@ class Apicontroller extends Controller
         $consulta=Venta::create($request->all());
         return response()->json($consulta,201);
     } 
+    public function modifventa(Request $request){
+        $venta=Venta::create($request->all());
+        return response()->json($venta,201);
+    }
 /*     use ApiResponser;
  */
 }
