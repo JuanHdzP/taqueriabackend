@@ -78,8 +78,10 @@ class Apicontroller extends Controller
     }
 
     public function buscausuario($id){
-        $user = User::findOrfail($id);
-        return response()->json($user,201);
+        $user = \DB::select("select u.id, u.name, u.email, u.img_perfil, u.direccion, 
+        u.telefono, u.type_user_id, t.nombre as tipousuario from users as u
+        inner join type_users as t on t.id = u.type_user_id where u.id=$id");
+        return response()->json($user[0],201);
     }
     public function eliminausuario($id){
         $consulta=User::find($id);
@@ -116,7 +118,7 @@ class Apicontroller extends Controller
     } 
 
     public function cargaventas(){
-        $ventas = \DB::select("select v.fecha, v.total, 
+        $ventas = \DB::select("select v.fecha, v.total, v.id,
         v.cliente_id,v.empleado_id, u.name as cliente, u1.name as empleado from ventas as v
         inner join users as u on v.cliente_id = u.id 
         inner join users as u1 on v.empleado_id = u1.id");
