@@ -17,7 +17,10 @@ class ApiproductosController extends ApiController
     {
         //
         $productos = Producto::all();
-            return $this->showAll($productos);
+        return response()->json([
+            'status'=>200,
+            'productos'=>$productos,
+        ]);
     }
 
     /**
