@@ -67,9 +67,8 @@ class Apicontroller extends Controller
         return response()->json(null,204);
     }
     public function altaproducto(Request $request){
-        $producto = Producto::findOrfail($id);
-        $producto->update($request->all());
-        return $this->showOne($producto);
+        $consulta=Producto::create($request->all());
+        return response()->json($consulta,201);
     } 
 
     public function modifproducto(Request $request){
