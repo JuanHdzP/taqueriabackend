@@ -63,6 +63,7 @@ Route::put('/ventas/{id}','Apicontroller@modifventa');
 */
 
 
-Route::post('login','App\Http\Controllers\Api\LoginController@login');
-Route::post('register','App\Http\Controllers\Api\RegisterController@register');
+Route::post('/login','LoginController@login');
+Route::post('/register','RegisterController@register');
+
 

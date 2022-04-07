@@ -1,11 +1,9 @@
 <?php
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
-use App\Notifications\SignupActivate;
-use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Validator;
-class RegisterController extends ApiController
+class RegisterController extends Controller
 {
 public function register(Request $request)
 {
@@ -17,7 +15,7 @@ $validator = Validator::make($request->all(), [
 'direccion' => 'required',
 'telefono' => 'required',
 'type_user_id' =>'required',
-/* 'type_user_id' => 'in:' . User::ADMIN . ','
+ /* 'type_user_id' => 'in:' . User::ADMIN . ','
 . User::SUB_ADMIN . ','
 . User::SELLER . ','
 . User::STORER . ','
@@ -44,7 +42,7 @@ $user = new User([
 'direccion' => $request->direccion,
 'telefono' => $request->telefono,
 'password' => bcrypt($request->password),
-'type_user_id'=> $request->type_user_id,
+'type_user_id'=> $request->type_user_id, 
 ]);
 /* if ($request->hasFile('img_perfil')) {
 $image = file_get_contents($request->file('img_perfil')->path());
