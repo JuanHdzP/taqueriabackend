@@ -100,8 +100,17 @@ class Apicontroller extends Controller
         return response()->json(null,204);
     }
     public function altausuario(Request $request){
-        $consulta=User::create($request->all());
-        return response()->json($consulta,201);
+        $user = new User([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+        'img_perfil'=>$request->img_perfil,
+        'direccion' => $request->direccion,
+        'telefono' => $request->telefono,
+        'type_user_id'=> $request->type_user_id, 
+    ]);
+        $user->save();
+        return response()->json($user,201);
     } 
 
     public function modifusuario(Request $request, $id){

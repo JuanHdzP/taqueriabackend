@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -23,18 +23,22 @@ class LoginController extends Controller
         $user = User::where('email', $fields['email'])->first();
 
         if (!Hash::check($fields['password'], $user->password)) {
-            return response(
-                ['message' => 'Informacion invalida'], 401
-            );
+                return response()->json([
+                    'status'=>401,
+                    'message' => 'Informacion invalida'
+                ]);
         }
 
-        $token = $user->createToken('XampleToken')->plainTextToken;
+        $token = $user->createToken('token')->accessToken;
 
         $response = [
             'user' => $user,
             'token' => $token,
         ];
-        return response($response, 201);
+        return response()->json([
+            'status'=>200,
+            'user'=>$user,
+        ]);
     }
 
 public function logout(Request $request)
